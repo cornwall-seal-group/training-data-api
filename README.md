@@ -8,12 +8,12 @@ This should allow you to upload an image to a particular container with metadata
 
 For each Seal, there should be a number of containers for the different image types and usages. For seal `LF1` for example; we should have the following containers:
 
-LF1-TRAINING-ORIGINAL
-LF1-TRAINING-PROCESSED
-LF1-TRAINING-TEST
+- LF1-TRAINING-ORIGINAL
+- LF1-TRAINING-PROCESSED
+- LF1-TRAINING-TEST
 
-LF1-USER-UNVERIFIED
-LF1-USER-VERIFIED
+- LF1-USER-UNVERIFIED
+- LF1-USER-VERIFIED
 
 ## Batch uploading content for AI classifier training
 
