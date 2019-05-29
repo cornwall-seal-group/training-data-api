@@ -4,6 +4,7 @@ import zipfile
 import os
 from image.process import process_image
 from werkzeug.utils import secure_filename
+import shutil
 
 app = Flask(__name__)
 file_handler = logging.FileHandler('server.log')
@@ -52,6 +53,12 @@ def bulk_upload_image():
         if file.filename == '':
             return "The filename is empty"
         if file and allowed_file(file.filename):
+
+            file_path = 'tmp/files/'
+            shutil.rmtree(file_path)
+            directory = os.path.dirname(file_path)
+            os.makedirs(directory)
+
             filename = secure_filename(file.filename)
             file.save(os.path.join(BULK_UPLOAD_FOLDER, filename))
             zip_ref = zipfile.ZipFile(
