@@ -70,7 +70,7 @@ def bulk_upload_image():
             zip_ref.extractall(BULK_UPLOAD_FOLDER + "/files/")
             zip_ref.close()
 
-    return data.seal
+    return request.form['seal']
 
 
 if __name__ == '__main__':
