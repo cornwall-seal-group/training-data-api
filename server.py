@@ -5,6 +5,7 @@ import uuid
 from predictions.head_detection import get_head_predictions
 from image.crop import crop_image
 from image.process import normalise_image
+from image_meta.store import store_seal_img_metadata
 from PIL import Image
 
 app = Flask(__name__)
@@ -60,7 +61,8 @@ def upload_image():
 def save_image(seal_name, img_to_upload):
 
     # Create a unique filename for the image
-    img_name = str(uuid.uuid4()) + '.jpg'
+    unique_name = str(uuid.uuid4())
+    img_name = unique_name + '.jpg'
 
     img = Image.open(img_to_upload).convert('RGB')
     saved_path = save_original_image(img_name, img, seal_name)
@@ -76,9 +78,14 @@ def save_image(seal_name, img_to_upload):
 
     save_normalised_image(img_name, normalised_img, seal_name)
 
-    # Save metadata to db
+    # Save metadata to file
+    seal_folder = app.config['UPLOAD_FOLDER'] + seal_name
+    store_seal_img_metadata(seal_folder, unique_name)
 
-    return {"percentage": best_prediction.probability}
+    return {
+        "percentage": best_prediction.probability,
+        "id": unique_name
+    }
 
 
 def save_original_image(img_name, img, seal_name):

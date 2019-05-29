@@ -1,5 +1,5 @@
-
-#
+# We receive the prediction bounding box as the following values in %
+# This needs to convert the %'s to pixels and crop the image accordingly
 # {
 #    height: 0.494349241,
 #    left: 0.0181922168,
