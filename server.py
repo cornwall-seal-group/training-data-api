@@ -26,7 +26,14 @@ def create_new_folder(local_dir):
 
 @app.route('/')
 def hello():
-    return 'Hello, World'
+    return {"hello": "world"}
+
+
+@app.route('/fake')
+def fake():
+    test_seal_name = 'LF3-TEST'
+    img_path = 'test/images/LF3-80.jpeg'
+    return save_image(test_seal_name, img_path)
 
 
 @app.route('/training/upload-image', methods=['POST'])
@@ -36,24 +43,29 @@ def upload_image():
 
         # Get name of seal
         seal_name = 'LF1'
-
-        # Create a unique filename for the image
-        img_name = str(uuid.uuid4()) + '.jpg'
-
         # Create folder for seal if not exists
         # Save file to <SEAL>/uploads/ folder
         # Submit image to Azure to find head
         # Crop image, and update contrast, save to <SEAL>/heads/ folder
 
         img_to_upload = request.files['image']
-        img = Image.open(img_to_upload).convert('RGB')
-        saved_path = save_original_image(img_name, img, seal_name)
 
-        predictions = get_head_predictions(saved_path)
-
-        return predictions
+        return save_image(seal_name, img_to_upload)
     else:
         return "Where is the image?"
+
+
+def save_image(seal_name, img_to_upload):
+
+    # Create a unique filename for the image
+    img_name = str(uuid.uuid4()) + '.jpg'
+
+    img = Image.open(img_to_upload).convert('RGB')
+    saved_path = save_original_image(img_name, img, seal_name)
+
+    predictions = get_head_predictions(saved_path)
+
+    return predictions
 
 
 def save_original_image(img_name, img, seal_name):
