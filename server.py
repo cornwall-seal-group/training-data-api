@@ -13,7 +13,7 @@ file_handler = logging.FileHandler('server.log')
 app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
-UPLOAD_FOLDER = '~/seal-images/'
+UPLOAD_FOLDER = '../seal-images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ORIGINAL_IMG_FOLDER = 'uploads/'
 HEADS_IMG_FOLDER = 'heads/'
