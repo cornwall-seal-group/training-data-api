@@ -20,8 +20,8 @@ def store_seal_metadata(folder, seal_name):
         csv_reader = csv.reader(csv_file)
         name_exists = False
         for row in csv_reader:
-            print row
-            if row == seal_name:
+            print row[0]
+            if row[0] == seal_name:
                 name_exists = True
                 break
 
