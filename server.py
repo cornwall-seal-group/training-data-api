@@ -66,7 +66,7 @@ def save_image(seal_name, img_to_upload):
     app.logger.info('saved image path ' + saved_path)
     head_predictions = get_head_predictions(saved_path)
 
-    return jsonify({"percentage": head_predictions['best_prediction'].probability})
+    return {"percentage": head_predictions['best_prediction'].probability}
 
 
 def save_original_image(img_name, img, seal_name):
