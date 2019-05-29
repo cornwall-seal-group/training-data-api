@@ -3,6 +3,8 @@ import logging
 import os
 import uuid
 from predictions.head_detection import get_head_predictions
+from image.crop import crop_image
+from image.process import normalise_image
 from PIL import Image
 
 app = Flask(__name__)
@@ -66,12 +68,35 @@ def save_image(seal_name, img_to_upload):
     app.logger.info('saved image path ' + saved_path)
     head_predictions = get_head_predictions(saved_path)
 
-    app.logger.info(head_predictions['best_prediction'])
-    return {"percentage": head_predictions['best_prediction'].probability}
+    best_prediction = head_predictions['best_prediction']
+    app.logger.info(best_prediction)
+
+    cropped_img = crop_image(img, best_prediction)
+    normalised_img = normalise_image(cropped_img)
+
+    save_normalised_image(img_name, normalised_img, seal_name)
+
+    # Save metadata to db
+
+    return {"percentage": best_prediction.probability}
 
 
 def save_original_image(img_name, img, seal_name):
     seal_upload_folder = seal_name + '/' + UPLOADS_SUB_FOLDER
+    upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
+
+    app.logger.info(upload_folder)
+    create_new_folder(upload_folder)
+
+    saved_path = os.path.join(upload_folder, img_name)
+    app.logger.info("saving {}".format(saved_path))
+    img.save(saved_path)
+
+    return saved_path
+
+
+def save_normalised_image(img_name, img, seal_name):
+    seal_upload_folder = seal_name + '/' + HEADS_SUB_FOLDER
     upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
 
     app.logger.info(upload_folder)
