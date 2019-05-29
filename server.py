@@ -15,7 +15,7 @@ app.logger.setLevel(logging.INFO)
 
 UPLOAD_FOLDER = '../seal-images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-ORIGINAL_IMG_FOLDER = 'uploads/'
+ORIGINAL_IMG_FOLDER = 'originals/'
 HEADS_IMG_FOLDER = 'heads/'
 
 
@@ -60,8 +60,8 @@ def upload_image():
 def save_image(seal_name, img_to_upload):
 
     # Create a unique filename for the image
-    unique_name = str(uuid.uuid4())
-    img_name = unique_name + '.jpg'
+    unique_img_name = str(uuid.uuid4())
+    img_name = unique_img_name + '.jpg'
 
     img = Image.open(img_to_upload).convert('RGB')
     saved_path = save_original_image(img_name, img, seal_name)
@@ -79,7 +79,7 @@ def save_image(seal_name, img_to_upload):
 
     # Save metadata to file
     seal_folder = app.config['UPLOAD_FOLDER'] + seal_name
-    store_seal_img_metadata(seal_folder, unique_name)
+    store_seal_img_metadata(seal_folder, seal_name, unique_img_name)
 
     # Save seal name for reference so we know what seals we have images for
     folder = app.config['UPLOAD_FOLDER']
@@ -87,7 +87,7 @@ def save_image(seal_name, img_to_upload):
 
     return {
         "percentage": best_prediction.probability,
-        "id": unique_name
+        "id": unique_img_name
     }
 
 

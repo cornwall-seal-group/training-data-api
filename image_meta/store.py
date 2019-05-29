@@ -2,8 +2,8 @@ import json
 import csv
 
 
-def store_seal_img_metadata(folder, id):
-    metadata_file = 'metadata.csv'
+def store_seal_img_metadata(folder, seal_name, id):
+    metadata_file = seal_name + '.csv'
     file_path = folder + '/' + metadata_file
 
     with open(file_path, 'a+') as csv_file:
