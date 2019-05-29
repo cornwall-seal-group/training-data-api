@@ -63,8 +63,10 @@ def save_image(seal_name, img_to_upload):
     img = Image.open(img_to_upload).convert('RGB')
     saved_path = save_original_image(img_name, img, seal_name)
 
+    app.logger.info('saved image path ' + saved_path)
     predictions = get_head_predictions(saved_path)
 
+    app.logger.info('predictions are ' + predictions)
     return predictions
 
 
