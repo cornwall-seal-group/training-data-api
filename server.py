@@ -44,12 +44,15 @@ def upload_image():
 def bulk_upload_image():
     data = {}
     if request.method == 'POST':
+        seal = request.form['seal']
+
+        if seal == '':
+            return "A seal ID is required to submit the zipfile"
+
         # check if the post request has the file part
         if 'file' not in request.files:
             return "Where is the file?"
 
-        data = request.data
-        print data
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
@@ -63,12 +66,21 @@ def bulk_upload_image():
                 shutil.rmtree(file_path)
             os.makedirs(directory)
 
+            extracted_files_dir = BULK_UPLOAD_FOLDER + "/files/"
             filename = secure_filename(file.filename)
             file.save(os.path.join(BULK_UPLOAD_FOLDER, filename))
             zip_ref = zipfile.ZipFile(
                 os.path.join(BULK_UPLOAD_FOLDER, filename), 'r')
-            zip_ref.extractall(BULK_UPLOAD_FOLDER + "/files/")
+            zip_ref.extractall(extracted_files_dir)
             zip_ref.close()
+
+            for filename in os.listdir(extracted_files_dir):
+                if filename.endswith(".jpeg") or filename.endswith(".png") or filename.endswith(".jpg"):
+                    img_path = os.path.join(directory, filename)
+                    process_image(app, seal, img_path)
+                    continue
+                else:
+                    continue
 
     return request.form['seal']
 
