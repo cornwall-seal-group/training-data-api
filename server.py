@@ -33,7 +33,7 @@ def hello():
 def fake():
     test_seal_name = 'LF3-TEST'
     img_path = 'test/images/LF3-80.jpeg'
-    return save_image(test_seal_name, img_path)
+    return jsonify(save_image(test_seal_name, img_path))
 
 
 @app.route('/training/upload-image', methods=['POST'])
