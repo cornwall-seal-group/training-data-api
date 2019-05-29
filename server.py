@@ -42,6 +42,7 @@ def upload_image():
 
 @app.route('/training/bulk-upload', methods=['POST'])
 def bulk_upload_image():
+    data = {}
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -68,6 +69,8 @@ def bulk_upload_image():
                 os.path.join(BULK_UPLOAD_FOLDER, filename), 'r')
             zip_ref.extractall(BULK_UPLOAD_FOLDER + "/files/")
             zip_ref.close()
+
+    return data
 
 
 if __name__ == '__main__':
