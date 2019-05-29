@@ -74,15 +74,19 @@ def bulk_upload_image():
             zip_ref.extractall(extracted_files_dir)
             zip_ref.close()
 
+            processed_images = 0
             for filename in os.listdir(extracted_files_dir):
                 if filename.endswith(".jpeg") or filename.endswith(".png") or filename.endswith(".jpg"):
                     img_path = os.path.join(directory, filename)
                     process_image(app, seal, img_path)
+                    processed_images += 1
                     continue
                 else:
                     continue
 
-    return request.form['seal']
+            shutil.rmtree(file_path)
+
+    return {"seal": request.form['seal'], "processed_images": processed_images}
 
 
 if __name__ == '__main__':
