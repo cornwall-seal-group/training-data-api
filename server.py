@@ -2,7 +2,7 @@ from flask import Flask, url_for, send_from_directory, request
 import logging
 import os
 import uuid
-from training_data_api.predictions.head_detection import get_head_predictions
+from predictions.head_detection import get_head_predictions
 from PIL import Image
 
 app = Flask(__name__)
