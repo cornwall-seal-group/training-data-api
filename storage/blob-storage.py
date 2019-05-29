@@ -8,7 +8,6 @@ account_name = config.STORAGE_ACCOUNT_NAME
 account_key = config.STORAGE_ACCOUNT_KEY
 
 # block_blob_service = BlockBlobService(account_name = account_name, account_key = account_key)
-
 # image_metadata = {'id': container_name, 'training': is_training_image, 'test': !is_training_image}
 
 
