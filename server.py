@@ -56,7 +56,7 @@ def bulk_upload_image():
             file.save(os.path.join(BULK_UPLOAD_FOLDER, filename))
             zip_ref = zipfile.ZipFile(
                 os.path.join(BULK_UPLOAD_FOLDER, filename), 'r')
-            zip_ref.extractall(BULK_UPLOAD_FOLDER)
+            zip_ref.extractall(BULK_UPLOAD_FOLDER + "/files/")
             zip_ref.close()
 
 
