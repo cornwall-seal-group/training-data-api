@@ -16,7 +16,7 @@ app.logger.setLevel(logging.INFO)
 UPLOAD_FOLDER = '~/seal-images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ORIGINAL_IMG_FOLDER = 'uploads/'
-HEADS_FOLDER = 'heads/'
+HEADS_IMG_FOLDER = 'heads/'
 
 
 def create_new_folder(local_dir):
@@ -88,7 +88,7 @@ def save_image(seal_name, img_to_upload):
 
 
 def save_original_image(img_name, img, seal_name):
-    ORIGINAL_IMG_FOLDER
+    seal_upload_folder = seal_name + '/' + ORIGINAL_IMG_FOLDER
     upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
 
     app.logger.info(upload_folder)
@@ -102,7 +102,7 @@ def save_original_image(img_name, img, seal_name):
 
 
 def save_normalised_image(img_name, img, seal_name):
-    seal_upload_folder = seal_name + '/' + HEADS_FOLDER
+    seal_upload_folder = seal_name + '/' + HEADS_IMG_FOLDER
     upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
 
     app.logger.info(upload_folder)
