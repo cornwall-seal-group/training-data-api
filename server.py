@@ -11,7 +11,8 @@ app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
 ALLOWED_EXTENSIONS = set(['zip'])
-BULK_UPLOAD_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "tmp/"
+BULK_UPLOAD_FOLDER = os.path.dirname(os.path.realpath(__file__)) + "/tmp/"
+
 
 def allowed_file(filename):
     return '.' in filename and \
