@@ -24,4 +24,4 @@ def crop_image(img, prediction):
     lower = upper + (b_height*image_height)
     # left, upper, right, lower
     print (left, upper, right, lower)
-    return img.crop(left, upper, right, lower)
+    return img.crop((left, upper, right, lower))
