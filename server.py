@@ -55,8 +55,9 @@ def bulk_upload_image():
         if file and allowed_file(file.filename):
 
             file_path = 'tmp/files/'
-            shutil.rmtree(file_path)
             directory = os.path.dirname(file_path)
+            if os.path.exists(directory):
+                shutil.rmtree(file_path)
             os.makedirs(directory)
 
             filename = secure_filename(file.filename)
