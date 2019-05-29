@@ -1,4 +1,4 @@
-from flask import Flask, url_for, send_from_directory, request
+from flask import Flask, url_for, send_from_directory, request, jsonify
 import logging
 import os
 import uuid
