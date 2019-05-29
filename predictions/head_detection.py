@@ -7,7 +7,7 @@ iteration_name = azure_config.ITERATION_NAME
 prediction_key = azure_config.PREDICTION_KEY
 
 
-def get_head_predictions(image_path):
+def get_head_predictions(app, image_path):
     predictor = CustomVisionPredictionClient(prediction_key, endpoint=endpoint)
 
     # Open the image and get back the prediction results.

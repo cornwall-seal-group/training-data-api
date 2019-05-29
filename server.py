@@ -64,7 +64,7 @@ def save_image(seal_name, img_to_upload):
     saved_path = save_original_image(img_name, img, seal_name)
 
     app.logger.info('saved image path ' + saved_path)
-    head_predictions = get_head_predictions(saved_path)
+    head_predictions = get_head_predictions(app, saved_path)
 
     app.logger.info(head_predictions['predictions'])
     return head_predictions
