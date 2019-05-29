@@ -25,6 +25,8 @@ def get_head_predictions(image_path):
         if best_prediction.probability < prediction.probability:
             best_prediction = prediction
 
+    app.logger.info(results.predictions)
+    app.logger.info(best_prediction)
     return {
         "predictions": results.predictions,
         "best_prediction": best_prediction
