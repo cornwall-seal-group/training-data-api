@@ -1,17 +1,13 @@
 import json
+import csv
 
 
 def store_seal_img_metadata(folder, id):
-
-    json_file = 'metadata.json'
+    json_file = 'metadata.csv'
     file_path = folder + '/' + json_file
-    with open(file_path, 'w+') as json_file:
-        try:
-            imgs = json.load(json_file)
-        except ValueError:
-            imgs = []
 
-        imgs.append({
-            "id": id
-        })
-        json.dump(imgs, json_file)
+    with open(file_path, 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow([id])
+
+    csvFile.close()
