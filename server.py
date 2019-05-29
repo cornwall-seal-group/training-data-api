@@ -47,8 +47,8 @@ def bulk_upload_image():
         if 'file' not in request.files:
             return "Where is the file?"
 
-        seal = request.seal
-        print seal
+        seal = request.data
+        print data
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
