@@ -5,7 +5,7 @@ import uuid
 from predictions.head_detection import get_head_predictions
 from image.crop import crop_image
 from image.process import normalise_image
-from image_meta.store import store_seal_img_metadata
+from image_meta.store import store_seal_img_metadata, store_seal_metadata
 from PIL import Image
 
 app = Flask(__name__)
@@ -80,6 +80,10 @@ def save_image(seal_name, img_to_upload):
     # Save metadata to file
     seal_folder = app.config['UPLOAD_FOLDER'] + seal_name
     store_seal_img_metadata(seal_folder, unique_name)
+
+    # Save seal name for reference so we know what seals we have images for
+    folder = app.config['UPLOAD_FOLDER']
+    store_seal_metadata(folder, seal_name)
 
     return {
         "percentage": best_prediction.probability,
