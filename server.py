@@ -13,11 +13,10 @@ file_handler = logging.FileHandler('server.log')
 app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
-PROJECT_HOME = os.path.dirname(os.path.realpath(__file__))
-UPLOAD_FOLDER = '{}/uploads/'.format(PROJECT_HOME)
+UPLOAD_FOLDER = '~/seal-images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-UPLOADS_SUB_FOLDER = 'uploads/'
-HEADS_SUB_FOLDER = 'heads/'
+ORIGINAL_IMG_FOLDER = 'uploads/'
+HEADS_FOLDER = 'heads/'
 
 
 def create_new_folder(local_dir):
@@ -89,7 +88,7 @@ def save_image(seal_name, img_to_upload):
 
 
 def save_original_image(img_name, img, seal_name):
-    seal_upload_folder = seal_name + '/' + UPLOADS_SUB_FOLDER
+    ORIGINAL_IMG_FOLDER
     upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
 
     app.logger.info(upload_folder)
@@ -103,7 +102,7 @@ def save_original_image(img_name, img, seal_name):
 
 
 def save_normalised_image(img_name, img, seal_name):
-    seal_upload_folder = seal_name + '/' + HEADS_SUB_FOLDER
+    seal_upload_folder = seal_name + '/' + HEADS_FOLDER
     upload_folder = app.config['UPLOAD_FOLDER'] + seal_upload_folder
 
     app.logger.info(upload_folder)
