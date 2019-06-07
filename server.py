@@ -113,7 +113,7 @@ def zip_upload_image():
             filename = secure_filename(file.filename)
             file.save(os.path.join(file_path, filename))
 
-    return {"uploaded": True}
+    return "Done"
 
 
 if __name__ == '__main__':
