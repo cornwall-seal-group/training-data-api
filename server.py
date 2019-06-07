@@ -108,7 +108,7 @@ def zip_upload_image():
             file_path = 'tmp/zip-files/'
             directory = os.path.dirname(file_path)
 
-            if os.path.exists(directory) == = False:
+            if os.path.exists(directory) == False:
                 os.makedirs(directory)
 
             filename = secure_filename(file.filename)
