@@ -89,5 +89,32 @@ def bulk_upload_image():
     return {"seal": request.form['seal'], "processed_images": processed_images}
 
 
+@app.route('/training/zip', methods=['POST'])
+def zip_upload_image():
+
+    if request.method == 'POST':
+
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            return "Where is the file?"
+
+        file = request.files['file']
+
+        if file.filename == '':
+            return "The filename is empty"
+
+        if file and allowed_file(file.filename):
+
+            file_path = 'tmp/zip-files/'
+            directory = os.path.dirname(file_path)
+
+            os.makedirs(directory)
+
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(file_path, filename))
+
+    return {"uploaded": True}
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
